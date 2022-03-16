@@ -39,7 +39,7 @@ for j in range(Number_Of_Submissions):
         outsheet.write(j + 2, 2, '-------------------')
         outsheet.write(j + 2, 0, '-------------------')
         j += 3
-        outsheet.write(j+3, 0, Date)
+        outsheet.write(j, 0, Date)
         PrevDate = Date
 
 
