@@ -2,6 +2,24 @@ import requests
 import datetime
 import time
 import xlsxwriter
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
+
+scope = ["https://spreadsheets.google.com/feeds",
+         'https://www.googleapis.com/auth/drive.file', 'https://www.googleapis.com/auth/spreadsheets',
+         'https://www.googleapis.com/auth/drive']
+
+creds =  ServiceAccountCredentials.from_json_keyfile_name("creds.json" ,scope)
+client = gspread.authorize(creds)
+
+sheet  = client.open("Project Submission Tracker").sheet1
+data = sheet.get_all_records()
+
+
+# When inserting you have to send a list <---
+
+
+# you can use "Sheet.row_values() ,sheet.col_values() , sheet.cell(1,3).value"
 
 # Number of Submissions Need to Print
 Number_Of_Submissions = int(input("Enter a Value: \n"))
@@ -13,13 +31,13 @@ info = response.json()
 
 # creating an excel sheet
 
-outworkbook = xlsxwriter.Workbook("out.xlsx")
-outsheet = outworkbook.add_worksheet()
+# outworkbook = xlsxwriter.Workbook("out.xlsx")
+# outsheet = outworkbook.add_worksheet()
 
 # writing columns
-outsheet.write('A1', 'Date')
-outsheet.write('B1', 'Problem Name')
-outsheet.write('C1', 'Status')
+sheet.write('A1', 'Date')
+sheet.write('B1', 'Problem Name')
+sheet.write('C1', 'Status')
 
 # # print('Problem Name: ', info['result'][j]['problem']['name'])
 
@@ -35,11 +53,11 @@ for j in range(Number_Of_Submissions):
 
 
     if (Date != PrevDate):
-        outsheet.write(j + 2, 1, '-------------------')
-        outsheet.write(j + 2, 2, '-------------------')
-        outsheet.write(j + 2, 0, '-------------------')
+        sheet.write(j + 2, 1, '-------------------')
+        sheet.write(j + 2, 2, '-------------------')
+        sheet.write(j + 2, 0, '-------------------')
         j += 3
-        outsheet.write(j, 0, Date)
+        sheet.write(j, 0, Date)
         PrevDate = Date
 
 
