@@ -4,7 +4,6 @@ import time
 import xlsxwriter
 
 # Number of Submissions Need to Print
-##ok
 Number_Of_Submissions = int(input("Enter a Value: \n"))
 Number_Of_Submissions_string = Number_Of_Submissions.__str__()
 url = "https://codeforces.com/api/user.status?handle=okazakii&from=1&count=" + Number_Of_Submissions_string
@@ -39,9 +38,8 @@ for j in range(Number_Of_Submissions):
         outsheet.write(j + 2, 1, '-------------------')
         outsheet.write(j + 2, 2, '-------------------')
         outsheet.write(j + 2, 0, '-------------------')
-        cell_for_Date = 'A' + (j + 3).__str__()
         j += 3
-        outsheet.write(cell_for_Date, Date)
+        outsheet.write(j+3, 0, Date)
         PrevDate = Date
 
 
