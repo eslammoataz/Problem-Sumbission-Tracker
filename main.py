@@ -45,7 +45,6 @@ for j in range(int(Number_Of_Submissions)):
     if (ProblemStatus == 'OK' and month==3):
         prevValue =int(sheet.cell(Day+1 ,3).value)
         sheet.update_cell(Day+1 ,3 , prevValue+1)
-        PrevDate = Date
 
 
 # seconds = (datetime.datetime(2020,9,1,23,59,59) - datetime.datetime(1970,1,1)).total_seconds()
